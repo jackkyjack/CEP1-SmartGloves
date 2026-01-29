@@ -6,16 +6,16 @@ export class MqttService implements OnModuleInit, OnModuleDestroy {
   private client: MqttClient;
 
   onModuleInit() {
-    this.client = connect('mqtt://localhost:1883', {
+    this.client = connect('mqtt://161.246.5.60:1883', {
       clientId: 'nestjs-client-' + Math.random().toString(16).slice(2),
     });
 
     this.client.on('connect', () => {
       console.log('✅ MQTT Connected');
 
-      this.client.subscribe('test/topic', (err) => {
+      this.client.subscribe('test', (err) => {
         if (!err) {
-          console.log('📡 Subscribed to test/topic');
+          console.log('📡 Subscribed to test');
         }
       });
     });

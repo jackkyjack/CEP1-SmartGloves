@@ -1,11 +1,11 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query} from '@nestjs/common';
 import { ManualsService } from './manuals.service';
 import { CreateManualDto } from './dto/create-manual.dto';
 import { UpdateManualDto } from './dto/update-manual.dto';
 
 @Controller('manuals')
 export class ManualsController {
-  constructor(private readonly manualsService: ManualsService) {}
+  constructor(private readonly manualsService: ManualsService) { }
 
   @Post()
   create(@Body() createManualDto: CreateManualDto) {
@@ -13,8 +13,11 @@ export class ManualsController {
   }
 
   @Get()
-  findAll() {
-    return this.manualsService.findAll();
+  findAll(@Query('limit') limit?: number, @Query('skip') skip?: number) {
+    return this.manualsService.findAll({
+      limit: Number(limit),
+      skip: Number(skip)
+    });
   }
 
   @Get(':id')
@@ -30,5 +33,10 @@ export class ManualsController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.manualsService.remove(id);
+  }
+
+  @Post('bulk')
+  bulkCreate(@Body() createManualDtos: CreateManualDto[]) {
+    return this.manualsService.insertMany(createManualDtos);
   }
 }

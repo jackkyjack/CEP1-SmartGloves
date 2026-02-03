@@ -5,11 +5,14 @@ export type ManualDocument = Manual & Document;
 
 @Schema()
 export class Manual {
-  @Prop({ required: true })
-  name: string;
+  @Prop({ required: true, index: true })
+  name: string; 
 
   @Prop()
   description: string;
+
+  @Prop()
+  sign_method: string;
 
   @Prop()
   url: string;

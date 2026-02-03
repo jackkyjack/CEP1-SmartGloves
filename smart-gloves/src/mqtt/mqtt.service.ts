@@ -11,17 +11,17 @@ export class MqttService implements OnModuleInit, OnModuleDestroy {
     });
 
     this.client.on('connect', () => {
-      console.log('✅ MQTT Connected');
+      console.log('MQTT Connected');
 
       this.client.subscribe('test', (err) => {
         if (!err) {
-          console.log('📡 Subscribed to test');
+          console.log('Subscribed to test');
         }
       });
     });
 
     this.client.on('message', (topic, message) => {
-      console.log(`📩 Message [${topic}]: ${message.toString()}`);
+      console.log(`Message [${topic}]: ${message.toString()}`);
     });
   }
 

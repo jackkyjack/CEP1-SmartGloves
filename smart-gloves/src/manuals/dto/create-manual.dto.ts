@@ -2,11 +2,17 @@ import { IsString, IsNumber, IsOptional } from 'class-validator';
 
 export class CreateManualDto {
     @IsString()
-    readonly name:string;
+    readonly name: string;
+
     @IsString()
     @IsOptional()
-    readonly description?:string;
+    readonly description?: string;
+
     @IsString()
     @IsOptional()
-    readonly url:string;
+    readonly sign_method?: string;
+
+    @IsString()
+    @IsOptional()
+    readonly url?: string;
 }
